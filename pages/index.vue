@@ -50,10 +50,6 @@ const handleCommand = (event) => {
         createTerminalInput();
       break;
     case 'login':
-      const loginDiv = createDiv();
-        loginDiv.innerHTML = `
-          Enter your username:
-        `;
         createLoginInput();
       break;  
     case 'register':
@@ -250,7 +246,7 @@ const createTerminalInput = () => {
     handleCommand(event);
   })
   div.innerHTML=`
-        <label style = "font-family: Cascadia Code, monospace">guest@geeks-connect:~$</label><input type="text" class="mx-2 outline outline-transparent" autofocus style = "font-family: Cascadia Code, monospace"/>
+        <label>guest@geeks-connect:~$</label><input type="text" class="mx-2 outline outline-transparent" autofocus/>
       `
   if(parentOutput){
     parentOutput.appendChild(div);
@@ -261,11 +257,12 @@ const createTerminalInput = () => {
 </script>
 
 <template>
-  <section class="h-screen w-screen rounded-lg p-3 overflow-hidden">
-    <div class="w-full h-full outline-1 rounded-lg p-2 overflow-auto outputs">
+
+  <section class=" bg-gradient-to-b from-slate-50 to-sky-300 h-screen w-screen rounded-lg p-3 overflow-hidden">
+    <div class="relative w-full h-full outline-1 rounded-lg p-2 overflow-auto outputs z-2">
       <label>guest@geeks-connect:~$</label><input type="text" disabled class="mx-2"/>
-      <h1  class="text-6xl pixelify-sans-400">GEEKS CONNECT</h1>
-      <p>Welcome to GeeksConnect, a social community space for tech geeks, 
+      <h1  class="text-6xl pixelify-sans-400">GEEK WORLD</h1>
+      <p>Welcome to Geek World, a social community space for tech geeks, 
         <br>
         brought to you by GeeksHacking
         <br>
@@ -273,16 +270,22 @@ const createTerminalInput = () => {
         <br>
         Type 'help' to see list of available commands.
       </p>
-      <label>guest@geeks-connect:~$</label><input @keydown="handleCommand" type="text" class="mx-2 outline outline-transparent" autofocus style = "font-family: Cascadia Code, monospace"/>
-
-
+      <label>guest@geeks-connect:~$</label><input @keydown="handleCommand" type="text" class="mx-2 outline outline-transparent" autofocus/>
+    </div>
+    <div class="absolute bottom-0 right-0 z-1 opacity-70 w-full md:w-2/3">
+      <img src="../assets/img/geek_world_logo.png">
     </div>
   </section>
 
 </template>
 
 <style lang="css">
-
+  h1{
+    font-family:Pixelify Sans;
+  }
+  section{
+    font-family: Cascadia Code, monospace;
+  }
 </style>
 
 
