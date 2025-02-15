@@ -3,48 +3,52 @@ import { ref } from 'vue'
 import ProfileCard from '~/components/ProfileCard.vue'
 import GuildCard from '~/components/GuildCard.vue'
 
-const showGroup = ref(false)
-const showChat = ref(false)
-const showId = ref(false)
-const showExplore = ref(false)
-const showStadium = ref(false)
+const hoverGroup = ref(false)
+const hoverChat = ref(false)
+const hoverId = ref(false)
+const hoverExplore = ref(false)
+const hoverStadium = ref(false)
+
+const showCard = ref("")
 </script>
 
 <template>
   <GeekCardCreation></GeekCardCreation>
-    <div class="w-full h-full bg-linear-[45deg,#8297F6,#89E1FA] flex justify-center items-center">
-        <div
-            class="font-mono tracking-[-0.1em] text-[#004D9A] text-[calc(100vw/5.3)]/[0.8em] ml-[-0.1em] whitespace-nowrap overflow-hidden absolute top-0">
-            &ltGEEK WORLD&gt</div>
-        <div class="relative">
-            <img class="relative h-[80%] w-auto object-cover floating" src="/assets/img/world_map.png" />
-            <button @mouseover="showGroup = true" @mouseleave="showGroup = false"
-                class="hover:cursor-pointer absolute top-[17%] right-[33%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
-                <span v-if="showGroup"
-                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
-                    Groups</span>
-            </button>
-            <button @mouseover="showChat = true" @mouseleave="showChat = false"
-                class="hover:cursor-pointer absolute top-[35%] left-[10%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
-                <span v-if="showChat"
-                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
-                    Chats</span></button>
-            <button @mouseover="showId = true" @mouseleave="showId = false"
-                class="hover:cursor-pointer absolute top-[56%] left-[19%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
-                <span v-if="showId"
-                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
-                    My ID</span></button>
-            <button @mouseover="showExplore = true" @mouseleave="showExplore = false"
-                class="hover:cursor-pointer absolute bottom-[12%] left-[25%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
-                <span v-if="showExplore"
-                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
-                    Explore</span></button>
-            <button @mouseover="showStadium = true" @mouseleave="showStadium = false"
-                class="hover:cursor-pointer absolute bottom-[20%] left-[45%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
-                <span v-if="showStadium"
-                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">Stadium</span></button>
-        </div>
+  <ProfileCard v-if="showCard === 'id'" @close="showCard = ''" />
+  <GuildCard v-if="showCard === 'group'" @close="showCard = ''" />
+  <div class="w-full h-full bg-linear-[45deg,#8297F6,#89E1FA] flex justify-center items-center">
+    <div
+      class="font-mono tracking-[-0.1em] text-[#004D9A] text-[calc(100vw/5.3)]/[0.8em] ml-[-0.1em] whitespace-nowrap overflow-hidden absolute top-0">
+      &ltGEEK WORLD&gt</div>
+    <div class="relative">
+      <img class="relative h-[80%] w-auto object-cover floating" src="/assets/img/world_map.png" />
+      <button @mouseover="hoverGroup = true" @mouseleave="hoverGroup = false" @click="showCard = 'group'"
+        class="hover:cursor-pointer absolute top-[17%] right-[33%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
+        <span v-if="hoverGroup"
+          class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
+          Groups</span>
+      </button>
+      <button @mouseover="hoverChat = true" @mouseleave="hoverChat = false"
+        class="hover:cursor-pointer absolute top-[35%] left-[10%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
+        <span v-if="hoverChat"
+          class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
+          Chats</span></button>
+      <button @mouseover="hoverId = true" @mouseleave="hoverId = false" @click="showCard = 'id'"
+        class="hover:cursor-pointer absolute top-[56%] left-[19%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
+        <span v-if="hoverId"
+          class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
+          My ID</span></button>
+      <button @mouseover="hoverExplore = true" @mouseleave="hoverExplore = false"
+        class="hover:cursor-pointer absolute bottom-[12%] left-[25%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
+        <span v-if="hoverExplore"
+          class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
+          Explore</span></button>
+      <button @mouseover="hoverStadium = true" @mouseleave="hoverStadium = false"
+        class="hover:cursor-pointer absolute bottom-[20%] left-[45%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
+        <span v-if="hoverStadium"
+          class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">Stadium</span></button>
     </div>
+  </div>
 
   <div class="fixed bottom-0 left-0 z-50 w-full h-[75px] bg-[#D9D9D9] border-t">
     <div class="grid h-full w-fit grid-cols-6 mx-auto font-medium">
