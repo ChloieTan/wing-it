@@ -7,14 +7,10 @@ defineProps({
   headerActions: {
     type: Array,
     default: []
-  },
-  showClose: {
-    type: Boolean,
-    default: true
   }
 })
 
-defineEmits(['edit', 'close'])
+const emit = defineEmits(['close'])
 </script>
 
 <template>
@@ -24,9 +20,9 @@ defineEmits(['edit', 'close'])
       <div class="bg-[#0080FF] text-black p-3 flex justify-between items-center border-3">
         <h1 class="text-2xl font-mono font-bold">{{ title }}</h1>
         <div class="flex gap-2">
-          <button v-for="action in headerActions" class="px-4 py-1 font-mono border-2" :class="`${action.backgroundColor
+          <button v-for="action in headerActions" class="hover:cursor-pointer px-4 py-1 font-mono border-2" :class="`${action.backgroundColor
             ?? 'bg-green-400'}`">{{ action.name }}</button>
-          <button class="border-3 bg-red-400 px-4 py-1 font-mono">X</button>
+          <button @click="emit('close')" class="hover:cursor-pointer border-3 bg-red-400 px-4 py-1 font-mono">X</button>
         </div>
       </div>
 
