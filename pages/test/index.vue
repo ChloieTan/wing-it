@@ -1,3 +1,1 @@
-<template>
-    Testing
-</template>
+<template>Testing</template>

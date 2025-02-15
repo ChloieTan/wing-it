@@ -10,7 +10,8 @@
     "postinstall": "nuxt prepare",
     "migration": "npx prisma generate",
     "migration:dev": "npx prisma migrate dev",
-    "migration:reset": "npx prisma migrate reset"
+    "migration:reset": "npx prisma migrate reset",
+    "prettier": "prettier . --write"
   },
   "dependencies": {
     "@prisma/nuxt": "^0.3.0",
