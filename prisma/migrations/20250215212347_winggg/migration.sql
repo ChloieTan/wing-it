@@ -2,6 +2,7 @@
 CREATE TABLE `User` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NULL,
     `password` VARCHAR(191) NOT NULL,
     `age` INTEGER NULL,
     `gender` VARCHAR(191) NULL,
@@ -20,6 +21,25 @@ CREATE TABLE `Guild` (
     `profilePic` VARCHAR(191) NOT NULL,
     `tags` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `GuildMember` (
+    `guildId` INTEGER NOT NULL,
+    `userId` INTEGER NOT NULL,
+    `leader` BOOLEAN NOT NULL,
+
+    PRIMARY KEY (`guildId`, `userId`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `GuildEvent` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `guildId` INTEGER NOT NULL,
+    `title` VARCHAR(191) NOT NULL,
+    `date` DATETIME(3) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -57,6 +77,15 @@ CREATE TABLE `UserInterest` (
 
     PRIMARY KEY (`userId`, `interestId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `GuildMember` ADD CONSTRAINT `GuildMember_guildId_fkey` FOREIGN KEY (`guildId`) REFERENCES `Guild`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `GuildMember` ADD CONSTRAINT `GuildMember_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `GuildEvent` ADD CONSTRAINT `GuildEvent_guildId_fkey` FOREIGN KEY (`guildId`) REFERENCES `Guild`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `UserAvatar` ADD CONSTRAINT `UserAvatar_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

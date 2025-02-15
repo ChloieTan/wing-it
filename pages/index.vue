@@ -135,6 +135,7 @@ const createAccount = async (input_username, input_password) => {
       }
     }
     )
+
     if (value) {
       createTerminalInput();
     }
@@ -154,9 +155,10 @@ const handleLogin = async (input_username, input_password) => {
       }
     });
 
-    // console.log(value);
+    console.log(value.id);
 
     if (value) {
+      sessionStorage.setItem("id",value.id);
       const router = useRouter();
       router.push({ path: "/home" });
     } else {
