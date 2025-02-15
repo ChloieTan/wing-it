@@ -18,7 +18,7 @@ defineEmits(['edit', 'close'])
 </script>
 
 <template>
-  <div class="w-full h-full p-15 flex justify-center items-center">
+  <div class="w-full h-full p-15 flex justify-center items-center bg-[rgba(0,0,0,0.5)] fixed z-51">
     <!-- Header Bar -->
     <div class="w-full min-h-[80vh] flex flex-col self-stretch">
       <div class="bg-[#0080FF] text-black p-3 flex justify-between items-center border-3">
