@@ -1,13 +1,16 @@
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineNuxtConfig({
-  compatibilityDate: "2025-02-15",
+  compatibilityDate: '2025-02-15',
   devtools: { enabled: true },
-  modules: ["@prisma/nuxt"],
-  css: ['~/public/assets/css/index.css'],
+  modules: ['@prisma/nuxt'],
+  css: ['~/assets/css/index.css'],
   vite: {
-    plugins: [
-      tailwindcss(),
-    ],
+    plugins: [tailwindcss()],
   },
-})
+  app: {
+    head: {
+      link: [{ rel: 'icon', type: 'image/png', href: '/logo.png' }],
+    },
+  },
+});

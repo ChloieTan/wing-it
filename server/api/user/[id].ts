@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
 
   return await prisma.user.findFirst({
     where: {
-      id: Number(id)
-    }
-  })
+      id: Number(id),
+    },
+  });
 });
