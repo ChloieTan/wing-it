@@ -9,12 +9,12 @@ const hoverStadium = ref(false)
 const showGeekCardCreation = ref(true);
 const showCard = ref("")
 
-onMounted(async()=>{
+onMounted(async () => {
   const id = sessionStorage.getItem('id');
   await nextTick();
   const { data: { value } } = await useFetch(`/api/user/${id}`, {
-      method: 'get',
-    });
+    method: 'get',
+  });
   console.log(value);
   if (value.UserInterest.length > 0) {
     showGeekCardCreation.value = false;
@@ -27,7 +27,7 @@ onMounted(async()=>{
   <GeekCardCreation v-if="showGeekCardCreation === true"></GeekCardCreation>
   <ProfileCard v-if="showCard === 'id'" @close="showCard = ''" />
   <GuildCard v-if="showCard === 'group'" @close="showCard = ''" />
-  <StadiumCard v-if="showCard === 'stadium'" leftTitle="Let the Games Begin!" rightTitle="Join a Competition!"
+  <GeneralStadiumCard v-if="showCard === 'stadium'" leftTitle="Let the Games Begin!" rightTitle="Join a Competition!"
     @close="showCard = ''" />
   <div class="w-full h-full bg-linear-[45deg,#8297F6,#89E1FA] flex justify-center items-center">
     <div

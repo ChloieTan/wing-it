@@ -27,7 +27,7 @@ const emit = defineEmits(['close'])
       </div>
 
       <!-- Card Content Container -->
-      <div class="bg-[#D9D9D9] p-2 relative h-full overflow-auto">
+      <div class="bg-white p-2 relative h-full overflow-auto">
         <slot></slot>
       </div>
     </div>
