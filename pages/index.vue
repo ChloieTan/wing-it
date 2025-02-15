@@ -154,10 +154,9 @@ const handleLogin = async (input_username, input_password) => {
       }
     });
 
-    console.log(value);
+    // console.log(value);
 
     if (value) {
-      sessionStorage.setItem("id", value.id)
       const router = useRouter();
       router.push({ path: "/home" });
     } else {
