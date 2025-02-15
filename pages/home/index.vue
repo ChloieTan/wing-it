@@ -1,22 +1,21 @@
 <script setup>
 import { ref } from 'vue'
-import ProfileCard from '~/components/ProfileCard.vue'
-import GuildCard from '~/components/GuildCard.vue'
 
-const showGroup = ref(false)
-const showChat = ref(false)
-const showId = ref(false)
-const showExplore = ref(false)
-const showStadium = ref(false)
+const hoverGroup = ref(false)
+const hoverChat = ref(false)
+const hoverId = ref(false)
+const hoverExplore = ref(false)
+const hoverStadium = ref(false)
 const showGeekCardCreation = ref(true);
+const showCard = ref("")
 
-const checkIfGeekCreated = async () =>{
+const checkIfGeekCreated = async () => {
   const id = sessionStorage.getItem('id');
   const { data: { value } } = await useFetch(`/api/user/${id}`, {
-      method: 'get',
-    });
+    method: 'get',
+  });
   console.log(value);
-  if(value.UserInterest.length>0){
+  if (value.UserInterest.length > 0) {
     showGeekCardCreation.value = false;
   }
 }
@@ -25,9 +24,11 @@ checkIfGeekCreated();
 </script>
 
 <template>
-  <GeekCardCreation v-if="showGeekCardCreation===true"></GeekCardCreation>
+  <GeekCardCreation v-if="showGeekCardCreation === true"></GeekCardCreation>
   <ProfileCard v-if="showCard === 'id'" @close="showCard = ''" />
   <GuildCard v-if="showCard === 'group'" @close="showCard = ''" />
+  <StadiumCard v-if="showCard === 'stadium'" leftTitle="Let the Games Begin!" rightTitle="Join a Competition!"
+    @close="showCard = ''" />
   <div class="w-full h-full bg-linear-[45deg,#8297F6,#89E1FA] flex justify-center items-center">
     <div
       class="font-mono tracking-[-0.1em] text-[#004D9A] text-[calc(100vw/5.3)]/[0.8em] ml-[-0.1em] whitespace-nowrap overflow-hidden absolute top-0">
@@ -55,7 +56,7 @@ checkIfGeekCreated();
         <span v-if="hoverExplore"
           class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
           Explore</span></button>
-      <button @mouseover="hoverStadium = true" @mouseleave="hoverStadium = false"
+      <button @mouseover="hoverStadium = true" @mouseleave="hoverStadium = false" @click="showCard = 'stadium'"
         class="hover:cursor-pointer absolute bottom-[20%] left-[45%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
         <span v-if="hoverStadium"
           class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">Stadium</span></button>
@@ -70,7 +71,7 @@ checkIfGeekCreated();
         <span
           class=" font-mono text-lg/tight text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Groups</span>
       </button>
-      <button type="button"
+      <button type="button" @click="showCard = 'stadium'"
         class="hover:cursor-pointer inline-flex flex-col items-center justify-center px-5 hover:bg-[#B5B5B5] group">
         <img class="h-[50px]" src="/assets/img/ic_stadium.png" />
         <span
