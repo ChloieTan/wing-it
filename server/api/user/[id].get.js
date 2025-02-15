@@ -7,5 +7,20 @@ export default defineEventHandler(async (event) => {
     where: {
       id: Number(id),
     },
+    select: {
+      username: true,
+      age: true,
+      gender: true,
+      status: true,
+      UserInterest: {
+        select: {
+          Interest: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+    },
   });
 });
