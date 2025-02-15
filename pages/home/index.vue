@@ -22,28 +22,28 @@ const showCard = ref("")
       <button @mouseover="hoverGroup = true" @mouseleave="hoverGroup = false"
         class="hover:cursor-pointer absolute top-[17%] right-[33%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
         <span v-if="hoverGroup"
-          class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
+          class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
           Groups</span>
       </button>
       <button @mouseover="hoverChat = true" @mouseleave="hoverChat = false"
         class="hover:cursor-pointer absolute top-[35%] left-[10%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
         <span v-if="hoverChat"
-          class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
+          class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
           Chats</span></button>
       <button @mouseover="hoverId = true" @mouseleave="hoverId = false" @click="showCard = 'id'"
         class="hover:cursor-pointer absolute top-[56%] left-[19%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
         <span v-if="hoverId"
-          class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
+          class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
           My ID</span></button>
       <button @mouseover="hoverExplore = true" @mouseleave="hoverExplore = false"
         class="hover:cursor-pointer absolute bottom-[12%] left-[25%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
         <span v-if="hoverExplore"
-          class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
+          class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
           Explore</span></button>
       <button @mouseover="hoverStadium = true" @mouseleave="hoverStadium = false"
         class="hover:cursor-pointer absolute bottom-[20%] left-[45%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
         <span v-if="hoverStadium"
-          class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">Stadium</span></button>
+          class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">Stadium</span></button>
     </div>
   </div>
 
