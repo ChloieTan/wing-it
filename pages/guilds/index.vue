@@ -2,6 +2,19 @@
 import { ref, onMounted, nextTick } from 'vue';
 
 const user = ref(null);
+const props = defineProps({
+  guildId: {
+    type: Number,
+  }
+})
+const guilds = ref(null);
+
+const {
+  data: { value },
+} = await useFetch('/api/guild/', { method: 'get' });
+guilds.value = value;
+console.log(guilds)
+
 
 onMounted(async () => {
   const userId = sessionStorage.getItem('id');
@@ -53,18 +66,59 @@ onMounted(async () => {
         </div>
 
         <!-- Guild Cards -->
-        <div v-for="guild in guilds" :key="guild.title" class="bg-mint-100 rounded-xl p-4 border-2 border-gray-300">
+        <div :title="guild.title"  v-for="guild in guilds" class="bg-linear-[45deg,#F8F8F8,#D0F9DC] rounded-4xl p-4 border-2 border-black">
           <div class="flex items-center gap-2">
             <div class="w-8 h-8 rounded-full bg-gray-300"></div>
             <h2 class="text-xl">{{ guild.title }}</h2>
           </div>
           <div class="mt-1">
-            <span class="text-sm text-gray-600">{{ guild.tags.split(', ') }}</span>
+            <span class="text-sm text-gray-600">{{ guild.tags }}</span>
           </div>
           <p class="mt-2 text-sm">{{ guild.description }}</p>
           <p class="mt-2 text-sm text-gray-500">By: {{ guild.author }}</p>
         </div>
       </div>
+      <div class="fixed bottom-0 left-0 z-50 w-full h-[75px] bg-[#D9D9D9] border-t">
+    <div class="grid h-full w-fit grid-cols-6 mx-auto font-medium">
+      <button type="button" @click="showCard = 'group'"
+        class="hover:cursor-pointer inline-flex flex-col items-center justify-center px-5 hover:bg-[#B5B5B5] group">
+        <img class="h-[50px]" src="/assets/img/ic_group.png" />
+        <span
+          class=" font-mono text-lg/tight text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Groups</span>
+      </button>
+      <button type="button"
+        class="hover:cursor-pointer inline-flex flex-col items-center justify-center px-5 hover:bg-[#B5B5B5] group">
+        <img class="h-[50px]" src="/assets/img/ic_stadium.png" />
+        <span
+          class=" font-mono text-lg/tight text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Stadium</span>
+      </button>
+      <button type="button"
+        class="hover:cursor-pointer inline-flex flex-col items-center justify-center px-5 hover:bg-[#B5B5B5] group">
+        <img class="h-[50px]" src="/assets/img/ic_chat.png" />
+        <span
+          class=" font-mono text-lg/tight text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Chats</span>
+      </button>
+      <button type="button"
+        class="hover:cursor-pointer inline-flex flex-col items-center justify-center px-5 hover:bg-[#B5B5B5] group"
+        @click="showCard = 'id'">
+        <img class="h-[50px]" src="/assets/img/ic_id.png" />
+        <span
+          class=" font-mono text-lg/tight text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Me</span>
+      </button>
+      <button type="button"
+        class="hover:cursor-pointer inline-flex flex-col items-center justify-center px-5 hover:bg-[#B5B5B5] group">
+        <img class="h-[50px]" src="/assets/img/ic_friends.png" />
+        <span
+          class=" font-mono text-lg/tight text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Friends</span>
+      </button>
+      <button type="button"
+        class="hover:cursor-pointer inline-flex flex-col items-center justify-center px-5 hover:bg-[#B5B5B5] group">
+        <img class="h-[50px]" src="/assets/img/ic_explore.png" />
+        <span
+          class=" font-mono text-lg/tight text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Explore</span>
+      </button>
+    </div>
+  </div>
     </main>
   </div>
 </template>
