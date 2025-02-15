@@ -4,9 +4,9 @@ defineProps({
     type: String,
     required: true
   },
-  showEdit: {
-    type: Boolean,
-    default: true
+  headerActions: {
+    type: Array,
+    default: []
   },
   showClose: {
     type: Boolean,
@@ -18,19 +18,20 @@ defineEmits(['edit', 'close'])
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-100 p-4 flex items-center justify-center">
-    <div class="w-full max-w-2xl">
-      <!-- Header Bar -->
-      <div class="bg-blue-500 text-black p-3 flex justify-between items-center rounded-t-lg">
-        <h1 class="text-2xl font-mono font-bold">My Geek ID</h1>
+  <div class="w-full h-full p-15 flex justify-center items-center">
+    <!-- Header Bar -->
+    <div class="w-full min-h-[80vh] flex flex-col self-stretch">
+      <div class="bg-[#0080FF] text-black p-3 flex justify-between items-center border-3">
+        <h1 class="text-2xl font-mono font-bold">{{ title }}</h1>
         <div class="flex gap-2">
-          <button class="bg-green-400 px-4 py-1 font-mono">Edit</button>
-          <button class="bg-red-400 px-4 py-1 font-mono">X</button>
+          <button v-for="action in headerActions" class="px-4 py-1 font-mono border-2" :class="`${action.backgroundColor
+            ?? 'bg-green-400'}`">{{ action.name }}</button>
+          <button class="border-3 bg-red-400 px-4 py-1 font-mono">X</button>
         </div>
       </div>
 
       <!-- Card Content Container -->
-      <div class="bg-gradient-to-br from-blue-200 to-blue-300 p-6 rounded-b-lg relative">
+      <div class="bg-[#D9D9D9] p-2 relative h-full">
         <slot></slot>
       </div>
     </div>
