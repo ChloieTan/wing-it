@@ -2,8 +2,6 @@ import prisma from '../lib/prisma.js';
 
 const users = [
   {
-    name: 'Karen',
-    email: 'karen@gmail.com',
     username: 'karen',
     password: 'password',
   },

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data } = await useFetch('/api/hello');
+
 
 const createDiv = () => {
   const parentOutput = document.querySelector('.outputs');
@@ -55,81 +55,186 @@ const handleCommand = (event) => {
           Enter your username:
         `;
         createLoginInput();
-        // createTerminalInput();
       break;  
     case 'register':
-      const registerDiv = createDiv();
-        registerDiv.innerHTML = `
-          <p style = "font-family: Cascadia Code, monospace;">Available commands:</p>
-          <ul>
-            <li style = "font-family: Cascadia Code, monospace;">help - show list of available commands</li>
-            <li style = "font-family: Cascadia Code, monospace;">about - show information about GeeksConnect</li>
-            <li style = "font-family: Cascadia Code, monospace;">contact - show contact information</li>
-            <li style = "font-family: Cascadia Code, monospace;">login --username <username> --password <password> - login to GeeksConnect</li>
-            <li style = "font-family: Cascadia Code, monospace;">register - register to GeeksConnect</li>
-            <li style = "font-family: Cascadia Code, monospace;">clear – clear history </li>
-          </ul>
-        `;
-        createTerminalInput();
+        createRegisterInput();
       break;  
     case 'clear':
       clearHistory();
       createTerminalInput();
       break;    
     default:
-      console.log('Invalid command');}
+      const invalidDiv = createDiv();
+      invalidDiv.innerHTML="Invalid command. Type 'help' to see list of available commands. "
+      createTerminalInput();}
   }
 }
-const handleLogin = (event) => {
-  if (event.key === "Enter") {
-    const username = event.target.value; 
-    checkUsernameInDatabase(username)
-      .then((usernameExists) => {
-        if (usernameExists) {
-          promptForPassword();
-        } else {
-          const doNotExistDiv = createDiv();
-          doNotExistDiv.innerHTML = "User does not exist! (Type clear to escape)";
-        }
-      })
-      .catch((error) => {
-        console.error("Error checking username:", error);
-      });
-  }
-};
 
-const checkUsernameInDatabase = (username) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const mockDatabase = ["user1", "user2", "admin"]; 
-      if (mockDatabase.includes(username)) {
-        resolve(true);
-      } else {
-        resolve(false);
-      }
-    }, 1000); 
-  });
-};
-
-
-
-const createLoginInput = () =>{
+const createRegisterInput = () => {
   const parentOutput = document.querySelector('.outputs');
   const div = document.createElement('div');
   div.className = 'history';
+  let username = "";
+  let password = "";
 
-  div.addEventListener("keydown",(event)=>{
-    handleLogin(event);
-  })
-  div.innerHTML=`
-        <label style = "font-family: Cascadia Code, monospace">Enter your username:</label><input type="text" class="mx-2 outline outline-transparent" autofocus style = "font-family: Cascadia Code, monospace"/>
-      `
-  if(parentOutput){
+  // Create the username input field
+  div.innerHTML = `
+    <label style="font-family: Cascadia Code, monospace">Enter a username:</label>
+    <input type="text" class="mx-2 outline outline-transparent" autofocus style="font-family: Cascadia Code, monospace"/>
+  `;
+
+  div.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      username = div.querySelector('input').value;
+      if (username) {
+        createPasswordInput(); 
+      } 
+    }
+  });
+
+  if (parentOutput) {
     parentOutput.appendChild(div);
-    div.getElementsByTagName('input')[0].focus(); 
+    div.getElementsByTagName('input')[0].focus();  // Focus on the username input
   }
+
+  const createPasswordInput = () => {
+    const passwordDiv = document.createElement('div');
+    passwordDiv.className = 'history';
+
+    // Create password input field
+    passwordDiv.innerHTML = `
+      <label style="font-family: Cascadia Code, monospace">Enter a password:</label>
+      <input type="password" class="mx-2 outline outline-transparent" autofocus style="font-family: Cascadia Code, monospace"/>
+    `;
+
+    if (parentOutput) {
+      parentOutput.appendChild(passwordDiv);
+      passwordDiv.getElementsByTagName('input')[0].focus();  
+    }
+
+    passwordDiv.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault(); 
+        password = passwordDiv.querySelector('input').value;
+        if (password) {
+          createAccount(username,password);
+        }
+      }
+    });
+  };
+
   return div;
-}
+};
+
+
+const createAccount = async (input_username,input_password) => {
+  try{
+    const {data: {value}} = await useFetch('/api/user',{
+          method: 'post',
+          body:{
+            username:input_username,
+            password:input_password
+          }
+        }
+      )
+    if(value){
+      createTerminalInput();
+    }
+  }catch (error) {
+      console.error("Error creating account:", error);
+    }
+};
+
+const handleLogin = async (input_username,input_password) => {
+  const parentOutput = document.querySelector('.outputs');
+  try {
+    const { data: {value} } = await useFetch('/api/user/verify',{
+          method: 'post',
+          body:{
+            username:input_username,
+            password:input_password
+          }
+    });
+
+    console.log(value);
+
+    if (value) {
+      const router = useRouter();
+      router.push({path:"/home"});
+    } else {
+      const doNotExistDiv = createDiv();
+      doNotExistDiv.innerHTML = "Username/Password is incorrect!";
+      parentOutput?.appendChild(doNotExistDiv); 
+      createTerminalInput();
+
+    }
+  } catch (error) {
+    console.error("Error handling login:", error);
+  }
+};
+
+
+const createLoginInput = () => {
+  const parentOutput = document.querySelector('.outputs');
+  const div = document.createElement('div');
+  div.className = 'history';
+  let username = "";
+  let password = "";
+
+  // Create the username input field
+  div.innerHTML = `
+    <label style="font-family: Cascadia Code, monospace">Enter your username:</label>
+    <input type="text" class="mx-2 outline outline-transparent" autofocus style="font-family: Cascadia Code, monospace"/>
+  `;
+
+  div.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      username = div.querySelector('input').value;
+      if (username) {
+        createPasswordInput(); 
+      } else {
+        alert("Please enter a username.");
+      }
+    }
+  });
+
+  if (parentOutput) {
+    parentOutput.appendChild(div);
+    div.getElementsByTagName('input')[0].focus();  // Focus on the username input
+  }
+
+  const createPasswordInput = () => {
+    const passwordDiv = document.createElement('div');
+    passwordDiv.className = 'history';
+
+    // Create password input field
+    passwordDiv.innerHTML = `
+      <label style="font-family: Cascadia Code, monospace">Enter your password:</label>
+      <input type="password" class="mx-2 outline outline-transparent" autofocus style="font-family: Cascadia Code, monospace"/>
+    `;
+
+    if (parentOutput) {
+      parentOutput.appendChild(passwordDiv);
+      passwordDiv.getElementsByTagName('input')[0].focus();  
+    }
+
+    passwordDiv.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault(); 
+        password = passwordDiv.querySelector('input').value;
+        if (password) {
+          handleLogin(username, password); 
+        }
+      }
+    });
+  };
+
+  return div;
+};
+
+
 const clearHistory  = () =>{
   const historyDivs = document.querySelectorAll('.history');
   historyDivs.forEach((div)=>{
@@ -173,6 +278,12 @@ const createTerminalInput = () => {
 
     </div>
   </section>
-  <!-- <pre>{{ data }}</pre>
-  <h1 class="text-3xl font-bold underline">Hello world!</h1> -->
+
 </template>
+
+<style lang="css">
+
+</style>
+
+
+

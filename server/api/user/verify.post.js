@@ -6,13 +6,6 @@ export default defineEventHandler(async (event) => {
   return await prisma.user.findFirst({
     where: {
       AND: [{ username: username }, { password: password }],
-    },
-    include: {
-      UserAvatar: {
-        where: {
-          selected: true,
-        },
-      },
-    },
+    }
   });
 });
