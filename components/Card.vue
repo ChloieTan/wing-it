@@ -14,7 +14,7 @@ const emit = defineEmits(['close'])
 </script>
 
 <template>
-  <div class="w-full h-full p-15 flex justify-center items-center bg-[rgba(0,0,0,0.5)] fixed z-51">
+  <div class="w-full h-full p-15 flex justify-center items-center bg-[rgba(0,0,0,0.5)] fixed z-51 overflow-none">
     <!-- Header Bar -->
     <div class="w-full min-h-[80vh] flex flex-col self-stretch">
       <div class="bg-[#0080FF] text-black p-3 flex justify-between items-center border-3">
@@ -27,7 +27,7 @@ const emit = defineEmits(['close'])
       </div>
 
       <!-- Card Content Container -->
-      <div class="bg-[#D9D9D9] p-2 relative h-full">
+      <div class="bg-[#D9D9D9] p-2 relative h-full overflow-auto">
         <slot></slot>
       </div>
     </div>

@@ -5,6 +5,10 @@ const users = [
     username: 'karen',
     password: 'password',
   },
+  {
+    username: 'dave',
+    password: 'password',
+  },
 ];
 
 const avatars = [];
@@ -112,12 +116,14 @@ const guilds = [
 
 const guildMembers = [
   { guildId: 1, userId: 1, leader: true },
-  { guildId: 2, userId: 1, leader: false },
+  { guildId: 2, userId: 1, leader: true },
+  { guildId: 2, userId: 2, leader: true },
 ];
 
 const guildEvents = [
   { guildId: 1, title: 'Tennis Party', date: new Date('2025-03-10') },
   { guildId: 1, title: 'Competition', date: new Date('2025-03-20') },
+  { guildId: 2, title: 'Anime Watching Session', date: new Date('2025-02-20') },
 ];
 
 const main = async () => {
