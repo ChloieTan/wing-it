@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref} from 'vue';
 import Card from '~/components/Card.vue';
 
 const user = ref(null);
