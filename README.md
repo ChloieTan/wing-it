@@ -1,3 +1,12 @@
+# Project Setup
+
+1. `npm install`
+2. Add `.env` file:
+   1. ```
+      DATABASE_URL="mysql://username:password@host:port/wingit"
+      ```
+3. `npm run dev`
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
