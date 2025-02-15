@@ -9,17 +9,17 @@ const hoverStadium = ref(false)
 const showGeekCardCreation = ref(true);
 const showCard = ref("")
 
-const checkIfGeekCreated = async () => {
+onMounted(async()=>{
   const id = sessionStorage.getItem('id');
+  await nextTick();
   const { data: { value } } = await useFetch(`/api/user/${id}`, {
-    method: 'get',
-  });
+      method: 'get',
+    });
   console.log(value);
   if (value.UserInterest.length > 0) {
     showGeekCardCreation.value = false;
   }
-}
-checkIfGeekCreated();
+})
 
 </script>
 
