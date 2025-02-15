@@ -18,6 +18,7 @@ model User {
   UserInterest UserInterest[]
   UserAvatar   UserAvatar[]
   GuildMembers GuildMember[]
+  Competition  Competition[]
 }
 
 model Guild {
@@ -80,4 +81,16 @@ model UserInterest {
   Interest   Interest @relation(fields: [interestId], references: [id], onDelete: Cascade)
 
   @@id([userId, interestId])
+}
+
+model Competition {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @db.Text
+  url         String
+  skills      String
+  creator     Int
+  capacity    Int
+  date        DateTime
+  User        User     @relation(fields: [creator], references: [id], onDelete: Cascade)
 }
