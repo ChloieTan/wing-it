@@ -11,35 +11,35 @@ const showStadium = ref(false)
 <template>
     <div class="w-full h-full bg-linear-[45deg,#8297F6,#89E1FA] flex justify-center items-center">
         <div
-            class="font-mono tracking-[-0.1em] text-[#004D9A] text-[calc(100vw/5.3)] ml-[-0.1em] whitespace-nowrap overflow-hidden absolute top-[-0.4em]">
+            class="font-mono tracking-[-0.1em] text-[#004D9A] text-[calc(100vw/5.3)]/[0.8em] ml-[-0.1em] whitespace-nowrap overflow-hidden absolute top-0">
             &ltGEEK WORLD&gt</div>
         <div class="relative">
             <img class="relative h-[80%] w-auto object-cover floating" src="/assets/img/world_map.png" />
             <button @mouseover="showGroup = true" @mouseleave="showGroup = false"
-                class="hover:cursor-pointer absolute top-[17%] right-[33%] w-[20px] h-[20px] rounded-[50%] bg-[#D9D9D9] border-2 border-black">
+                class="hover:cursor-pointer absolute top-[17%] right-[33%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
                 <span v-if="showGroup"
-                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-2 border-black rounded-md">
+                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
                     Groups</span>
             </button>
             <button @mouseover="showChat = true" @mouseleave="showChat = false"
-                class="hover:cursor-pointer absolute top-[35%] left-[10%] w-[20px] h-[20px] rounded-[50%] bg-[#D9D9D9] border-2 border-black">
+                class="hover:cursor-pointer absolute top-[35%] left-[10%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
                 <span v-if="showChat"
-                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-2 border-black rounded-md">
+                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
                     Chats</span></button>
             <button @mouseover="showId = true" @mouseleave="showId = false"
-                class="hover:cursor-pointer absolute top-[56%] left-[19%] w-[20px] h-[20px] rounded-[50%] bg-[#D9D9D9] border-2 border-black">
+                class="hover:cursor-pointer absolute top-[56%] left-[19%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
                 <span v-if="showId"
-                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-2 border-black rounded-md">
+                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
                     My ID</span></button>
             <button @mouseover="showExplore = true" @mouseleave="showExplore = false"
-                class="hover:cursor-pointer absolute bottom-[12%] left-[25%] w-[20px] h-[20px] rounded-[50%] bg-[#D9D9D9] border-2 border-black">
+                class="hover:cursor-pointer absolute bottom-[12%] left-[25%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
                 <span v-if="showExplore"
-                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-2 border-black rounded-md">
+                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
                     Explore</span></button>
             <button @mouseover="showStadium = true" @mouseleave="showStadium = false"
-                class="hover:cursor-pointer absolute bottom-[20%] left-[45%] w-[20px] h-[20px] rounded-[50%] bg-[#D9D9D9] border-2 border-black">
+                class="hover:cursor-pointer absolute bottom-[20%] left-[45%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
                 <span v-if="showStadium"
-                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-2 border-black rounded-md">Stadium</span></button>
+                    class="top-[20px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">Stadium</span></button>
         </div>
     </div>
 
