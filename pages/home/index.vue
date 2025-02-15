@@ -3,17 +3,29 @@ import { ref } from 'vue'
 import ProfileCard from '~/components/ProfileCard.vue'
 import GuildCard from '~/components/GuildCard.vue'
 
-const hoverGroup = ref(false)
-const hoverChat = ref(false)
-const hoverId = ref(false)
-const hoverExplore = ref(false)
-const hoverStadium = ref(false)
+const showGroup = ref(false)
+const showChat = ref(false)
+const showId = ref(false)
+const showExplore = ref(false)
+const showStadium = ref(false)
+const showGeekCardCreation = ref(true);
 
-const showCard = ref("")
+const checkIfGeekCreated = async () =>{
+  const id = sessionStorage.getItem('id');
+  const { data: { value } } = await useFetch(`/api/user/${id}`, {
+      method: 'get',
+    });
+  console.log(value);
+  if(value.UserInterest.length>0){
+    showGeekCardCreation.value = false;
+  }
+}
+checkIfGeekCreated();
+
 </script>
 
 <template>
-  <GeekCardCreation></GeekCardCreation>
+  <GeekCardCreation v-if="showGeekCardCreation===true"></GeekCardCreation>
   <ProfileCard v-if="showCard === 'id'" @close="showCard = ''" />
   <GuildCard v-if="showCard === 'group'" @close="showCard = ''" />
   <div class="w-full h-full bg-linear-[45deg,#8297F6,#89E1FA] flex justify-center items-center">

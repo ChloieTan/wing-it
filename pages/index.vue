@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+const showCreation = ref(true);
 
 const createDiv = () => {
   const parentOutput = document.querySelector('.outputs');
@@ -155,12 +155,11 @@ const handleLogin = async (input_username, input_password) => {
       }
     });
 
-    console.log(value.id);
-
     if (value) {
       sessionStorage.setItem("id",value.id);
       const router = useRouter();
       router.push({ path: "/home" });
+
     } else {
       const doNotExistDiv = createDiv();
       doNotExistDiv.innerHTML = "Username/Password is incorrect!";
