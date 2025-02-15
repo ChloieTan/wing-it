@@ -18,6 +18,16 @@ model User {
   UserAvatar   UserAvatar[]
 }
 
+model Guild {
+  id          Int      @id @default(autoincrement())
+  title       String
+  author      String
+  description String
+  profilePic  String
+  tags        String
+  createdAt   DateTime @default(now())
+}
+
 model Avatar {
   id         Int          @id @default(autoincrement())
   url        String

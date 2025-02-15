@@ -11,7 +11,7 @@ const avatars = [];
 
 const userAvatars = [];
 
-const interests = [
+export const interests = [
   { name: 'Artificial Intelligence' },
   { name: 'Cybersecurity' },
   { name: 'Data Science' },
@@ -72,6 +72,44 @@ const userInterests = [
   { userId: 1, interestId: 30 },
 ];
 
+const guilds = [
+  {
+    title: "Tennis Geeks",
+    author: "Tony Stark",
+    description: "Lorem ipsum dolor sit amet, consectetur",
+    profilePic: "https://example.com/knights.png",
+    tags: "tennis, swe, data sci"
+  },
+  {
+    title: "Anime Geeks",
+    author: "Weeb Forever",
+    description: "Lorem ipsum dolor sit amet, consectetur",
+    profilePic: "https://example.com/mages.png",
+    tags: "anime, gaming, japan, ai"
+  },
+  {
+    title: "Kdrama Geeks",
+    author: "Obi Wan",
+    description: "Lorem ipsum dolor sit amet, consectetur",
+    profilePic: "https://example.com/shadows.png",
+    tags: "street food, korea, data sci"
+  },
+  {
+    title: "League Geeks",
+    author: "Black Widow",
+    description: "Lorem ipsum dolor sit amet, consectetur",
+    profilePic: "https://example.com/shadows.png",
+    tags: "league, mobile legends, swe",
+  },
+  {
+    title: "Japan Geeks",
+    author: "Oishi Low",
+    description: "Lorem ipsum dolor sit amet, consectetur",
+    profilePic: "https://example.com/shadows.png",
+    tags: "japan, travelling, swe",
+  },
+]
+
 const main = async () => {
   await prisma.user.createMany({ data: users });
 
@@ -80,6 +118,8 @@ const main = async () => {
 
   await prisma.interest.createMany({ data: interests });
   await prisma.userInterest.createMany({ data: userInterests });
+
+  await prisma.guild.createMany({data: guilds})
 };
 
 main()
