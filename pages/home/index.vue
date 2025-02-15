@@ -11,6 +11,7 @@ const showStadium = ref(false)
 </script>
 
 <template>
+  <GeekCardCreation></GeekCardCreation>
     <div class="w-full h-full bg-linear-[45deg,#8297F6,#89E1FA] flex justify-center items-center">
         <div
             class="font-mono tracking-[-0.1em] text-[#004D9A] text-[calc(100vw/5.3)]/[0.8em] ml-[-0.1em] whitespace-nowrap overflow-hidden absolute top-0">

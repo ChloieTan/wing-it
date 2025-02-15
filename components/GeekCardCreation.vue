@@ -97,7 +97,7 @@ const handleGeekInfo = async() =>{
 
 </script>
 <template>
-    <Card title="Create Geek ID" v-if="showCreateGeekId===false">
+    <Card title="Create Geek ID" v-if="showCreateGeekId===true">
         <div class="flex row w-full">
             <div class=" w-1/2">
                 <img src="../assets/img/geek_world_logo.png">
