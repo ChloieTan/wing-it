@@ -8,6 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "seed": "node prisma/seed.js",
     "migration": "npx prisma generate",
     "migration:dev": "npx prisma migrate dev",
     "migration:reset": "npx prisma migrate reset",
@@ -22,11 +23,11 @@
     "vue": "latest",
     "vue-router": "latest"
   },
-  "prisma": {
-    "schema": "prisma/schema.prisma"
-  },
   "devDependencies": {
     "dotenv": "^16.4.7",
     "prettier": "^3.5.1"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   }
 }
