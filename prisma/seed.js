@@ -74,41 +74,51 @@ const userInterests = [
 
 const guilds = [
   {
-    title: "Tennis Geeks",
-    author: "Tony Stark",
-    description: "Lorem ipsum dolor sit amet, consectetur",
-    profilePic: "https://example.com/knights.png",
-    tags: "tennis, swe, data sci"
+    title: 'Tennis Geeks',
+    author: 'Tony Stark',
+    description: 'Lorem ipsum dolor sit amet, consectetur',
+    profilePic: 'https://example.com/knights.png',
+    tags: 'tennis, swe, data sci',
   },
   {
-    title: "Anime Geeks",
-    author: "Weeb Forever",
-    description: "Lorem ipsum dolor sit amet, consectetur",
-    profilePic: "https://example.com/mages.png",
-    tags: "anime, gaming, japan, ai"
+    title: 'Anime Geeks',
+    author: 'Weeb Forever',
+    description: 'Lorem ipsum dolor sit amet, consectetur',
+    profilePic: 'https://example.com/mages.png',
+    tags: 'anime, gaming, japan, ai',
   },
   {
-    title: "Kdrama Geeks",
-    author: "Obi Wan",
-    description: "Lorem ipsum dolor sit amet, consectetur",
-    profilePic: "https://example.com/shadows.png",
-    tags: "street food, korea, data sci"
+    title: 'Kdrama Geeks',
+    author: 'Obi Wan',
+    description: 'Lorem ipsum dolor sit amet, consectetur',
+    profilePic: 'https://example.com/shadows.png',
+    tags: 'street food, korea, data sci',
   },
   {
-    title: "League Geeks",
-    author: "Black Widow",
-    description: "Lorem ipsum dolor sit amet, consectetur",
-    profilePic: "https://example.com/shadows.png",
-    tags: "league, mobile legends, swe",
+    title: 'League Geeks',
+    author: 'Black Widow',
+    description: 'Lorem ipsum dolor sit amet, consectetur',
+    profilePic: 'https://example.com/shadows.png',
+    tags: 'league, mobile legends, swe',
   },
   {
-    title: "Japan Geeks",
-    author: "Oishi Low",
-    description: "Lorem ipsum dolor sit amet, consectetur",
-    profilePic: "https://example.com/shadows.png",
-    tags: "japan, travelling, swe",
+    title: 'Japan Geeks',
+    author: 'Oishi Low',
+    description: 'Lorem ipsum dolor sit amet, consectetur',
+    profilePic: 'https://example.com/shadows.png',
+    tags: 'japan, travelling, swe',
   },
-]
+];
+
+const guildMembers = [
+  { guildId: 1, userId: 1, leader: true },
+  { guildId: 2, userId: 1, leader: false },
+];
+
+const guildEvents = [
+  { guildId: 1, title: 'Tennis Party', date: new Date('2025-03-10') },
+  { guildId: 1, title: 'Competition', date: new Date('2025-03-20') },
+];
 
 const main = async () => {
   await prisma.user.createMany({ data: users });
@@ -119,7 +129,9 @@ const main = async () => {
   await prisma.interest.createMany({ data: interests });
   await prisma.userInterest.createMany({ data: userInterests });
 
-  await prisma.guild.createMany({data: guilds})
+  await prisma.guild.createMany({ data: guilds });
+  await prisma.guildMember.createMany({ data: guildMembers });
+  await prisma.guildEvent.createMany({ data: guildEvents });
 };
 
 main()

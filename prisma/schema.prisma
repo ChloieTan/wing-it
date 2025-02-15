@@ -16,16 +16,37 @@ model User {
   status       String?
   UserInterest UserInterest[]
   UserAvatar   UserAvatar[]
+  GuildMembers GuildMember[]
 }
 
 model Guild {
-  id          Int      @id @default(autoincrement())
-  title       String
-  author      String
-  description String
-  profilePic  String
-  tags        String
-  createdAt   DateTime @default(now())
+  id           Int           @id @default(autoincrement())
+  title        String
+  author       String
+  description  String
+  profilePic   String
+  tags         String
+  createdAt    DateTime      @default(now())
+  GuildMembers GuildMember[]
+  GuildEvent   GuildEvent[]
+}
+
+model GuildMember {
+  guildId Int
+  userId  Int
+  leader  Boolean
+  Guild   Guild   @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  User    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([guildId, userId])
+}
+
+model GuildEvent {
+  id      Int      @id @default(autoincrement())
+  guildId Int
+  title   String
+  date    DateTime
+  Guild   Guild    @relation(fields: [guildId], references: [id], onDelete: Cascade)
 }
 
 model Avatar {

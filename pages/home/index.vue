@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import ProfileCard from '~/components/ProfileCard.vue'
+import GuildCard from '~/components/GuildCard.vue'
 
 const hoverGroup = ref(false)
 const hoverChat = ref(false)
@@ -19,7 +20,7 @@ const showCard = ref("")
       &ltGEEK WORLD&gt</div>
     <div class="relative">
       <img class="relative h-[80%] w-auto object-cover floating" src="/assets/img/world_map.png" />
-      <button @mouseover="hoverGroup = true" @mouseleave="hoverGroup = false"
+      <button @mouseover="hoverGroup = true" @mouseleave="hoverGroup = false" @click="showCard = 'group'"
         class="hover:cursor-pointer absolute top-[17%] right-[33%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
         <span v-if="hoverGroup"
           class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
@@ -49,7 +50,7 @@ const showCard = ref("")
 
   <div class="fixed bottom-0 left-0 z-50 w-full h-[75px] bg-[#D9D9D9] border-t">
     <div class="grid h-full w-fit grid-cols-6 mx-auto font-medium">
-      <button type="button"
+      <button type="button" @click="showCard = 'group'"
         class="hover:cursor-pointer inline-flex flex-col items-center justify-center px-5 hover:bg-[#B5B5B5] group">
         <img class="h-[50px]" src="/assets/img/ic_group.png" />
         <span
