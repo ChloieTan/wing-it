@@ -6,7 +6,20 @@ const previousSelection = ref(null);
 var interestsToAdd = ref([]);
 var search_interest = ref("");
 var filteredInterests = ref([]);
-const showCreateGeekId = ref(true);
+const showCreateGeekId = ref(false);
+
+const props = defineProps({
+  guildId: {
+    type: Number,
+  }
+})
+const guilds = ref(null);
+
+const {
+  data: { value },
+} = await useFetch('/api/guild/', { method: 'get' });
+guilds.value = value;
+console.log(guilds)
 
 const getInterestList = async()=>{
     try {
@@ -147,13 +160,42 @@ const handleGeekInfo = async() =>{
             </div>
         </div>
         <div class="w-full relative">
-            <button class="absolute bg-green-400 bottom-0 right-0 px-4 py-1 font-mono" v-on:click="handleGeekInfo">Next</button>
+            <button class="absolute bg-green-400 bottom-0 right-0 px-4 py-1  top-5 font-mono justify-center " v-on:click="handleGeekInfo">Next</button>
         </div>
 
 
     </Card>
     <Card title="Your Suggested Guilds" v-else>
-        <h2 class="text-2xl text-center mt-3">We found some suitable guilds for you based on your
-            interests!</h2>
-    </Card>
+  <div class="bg-linear-[#78B6F5,#ECECEC] rounded-2xl mt-15 h-100 p-2 border-3">
+    <h2 class="text-2xl font-mono p-5 mt-3">
+      We found some suitable guilds for you based on your interests!
+    </h2>
+    <!-- Flex container for horizontal layout -->
+    <div class="flex flex-wrap gap-4 justify-center">
+      <div
+        v-for="guild in guilds.slice(0,2)"
+        :key="guild.id"
+        :title="guild.title"
+        class="bg-linear-[45deg,#F8F8F8,#D0F9DC] w-80 rounded-4xl p-8 border-2 font-mono border-black relative"
+      >
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-gray-300"></div>
+          <h2 class="text-xl">{{ guild.title }}</h2>
+        </div>
+        <div class="mt-1">
+          <span class="text-sm text-gray-600">{{ guild.tags }}</span>
+        </div>
+        <p class="mt-2 text-sm">{{ guild.description }}</p>
+        <p class="mt-2 text-sm text-gray-500">By: {{ guild.author }}</p>
+        <!-- Plus sign at the bottom center of the card -->
+        <div class="absolute bottom-0 transform right-3 translate-x-1 text-9xl">
+          +
+        </div>
+      </div>
+    </div>
+    <button class="justify-center absolute bottom-35 right-9 flex bg-linear-[#E94FC5,#FFB7EE] w-40 h-10 rounded-2xl border-2 font-mono items-center">Done</button>
+  </div>
+</Card>
+
+
 </template>
