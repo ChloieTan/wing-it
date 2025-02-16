@@ -27,6 +27,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <ExploreCard v-if="showCard === 'explore'" @close="showCard = ''" />
   <GeekCardCreation v-if="showGeekCardCreation === true"></GeekCardCreation>
   <ProfileCard v-if="showCard === 'id'" @close="showCard = ''" />
   <GuildCard v-if="showCard === 'group'" @close="showCard = ''" />
@@ -54,7 +55,7 @@ onMounted(async () => {
         <span v-if="hoverId"
           class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
           My ID</span></button>
-      <button @mouseover="hoverExplore = true" @mouseleave="hoverExplore = false"
+      <button @mouseover="hoverExplore = true" @mouseleave="hoverExplore = false" @click="showCard = 'explore'"
         class="hover:cursor-pointer absolute bottom-[12%] left-[25%] w-[25px] h-[25px] rounded-[50%] bg-[#D9D9D9] border-3 border-black">
         <span v-if="hoverExplore"
           class="top-[30px] left-0 font-mono bg-[#D9D9D9] absolute whitespace-nowrap px-[20px] py-[10px] border-3 border-black rounded-md">
@@ -99,7 +100,7 @@ onMounted(async () => {
         <span
           class=" font-mono text-lg/tight text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Friends</span>
       </button>
-      <button type="button"
+      <button type="button" @click="showCard = 'explore'"
         class="hover:cursor-pointer inline-flex flex-col items-center justify-center px-5 hover:bg-[#B5B5B5] group">
         <img class="h-[50px]" src="/assets/img/ic_explore.png" />
         <span
