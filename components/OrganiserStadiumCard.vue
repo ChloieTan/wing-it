@@ -117,18 +117,26 @@ const emit = defineEmits(['close'])
                         <div class="flex-8 text-left self-start p-2  bg-white w-full">
                             <p class="font-bold">Total Budget: $8000 / 10,000</p>
                             <p class="underline font-bold my-2">Sponsors:</p>
-                            <div class="flex flex-col p-1" v-for="(image, index) in sponsorImageLinks" :key="image.id">
-                                <img :src=image.link :alt="'Sponsor ' + (index + 1)" class="rounded-lg shadow-lg">
-                            </div>
+                                <div class="grid grid-cols-2 gap-4 justify-between">
+                                    <img src="../assets/img/sponsor_1.png">
+                                    <img src="../assets/img/sponsor_2.png">
+                                    <img src="../assets/img/sponsor_3.png">
+                                    <img src="../assets/img/sponsor_4.png">
+                                    <img src="../assets/img/sponsor_5.png">
+                                    <img src="../assets/img/sponsor_6.png">
+                                </div>
+                            <!-- <div class="flex flex-col p-1" v-for="(image, index) in sponsorImageLinks" :key="image.id">
+                                <img :src="`${image.link}`" :alt="'Sponsor ' + (index + 1)" class="rounded-lg shadow-lg">
+                            </div> -->
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="flex-1 w-full border-3 h-full  rounded-lg">
+            <div class="flex-1 w-full border-3 h-full  rounded-lg overflow-hidden">
                 <div class="flex-1 text-center text-2xl p-1 bg-[#D34848] font-bold">
                     Upcoming
                 </div>
-                <div class="flex-8  border-t-3 text-center">
+                <div class="flex-8  border-t-3 text-center h-full overflow-auto">
                     <div class="flex flex-col p-2 mt-1" v-for="(upcoming, index) in upcomingItems" :key="upcoming.id">
                         <div :class="[colors[index%colors.length], 'p-4', 'font-mono', 'text-lg', 'rounded-lg']">
                             <div class="flex-1 flex flex-row justify-between">
