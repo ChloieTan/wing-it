@@ -6,7 +6,7 @@ const previousSelection = ref(null);
 var interestsToAdd = ref([]);
 var search_interest = ref("");
 var filteredInterests = ref([]);
-const showCreateGeekId = ref(false);
+const showCreateGeekId = ref(true);
 
 const props = defineProps({
   guildId: {
