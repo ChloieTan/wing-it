@@ -27,6 +27,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <OrganiserStadiumCard></OrganiserStadiumCard>
   <ExploreCard v-if="showCard === 'explore'" @close="showCard = ''" />
   <GeekCardCreation v-if="showGeekCardCreation === true"></GeekCardCreation>
   <ProfileCard v-if="showCard === 'id'" @close="showCard = ''" />
