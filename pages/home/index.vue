@@ -1,23 +1,26 @@
 <script setup>
 import { ref } from 'vue'
+import { verifyUser } from '~/assets/js/verify'
 
 const hoverGroup = ref(false)
 const hoverChat = ref(false)
 const hoverId = ref(false)
 const hoverExplore = ref(false)
 const hoverStadium = ref(false)
-const showGeekCardCreation = ref(true);
+const showGeekCardCreation = ref(false);
 const showCard = ref("")
 
 onMounted(async () => {
+  verifyUser()
+
   const id = sessionStorage.getItem('id');
   await nextTick();
   const { data: { value } } = await useFetch(`/api/user/${id}`, {
     method: 'get',
   });
   console.log(value);
-  if (value.UserInterest.length > 0) {
-    showGeekCardCreation.value = false;
+  if (value.UserInterest.length === 0) {
+    showGeekCardCreation.value = true;
   }
 })
 
