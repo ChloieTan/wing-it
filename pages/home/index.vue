@@ -9,7 +9,6 @@ const hoverExplore = ref(false)
 const hoverStadium = ref(false)
 const showGeekCardCreation = ref(false);
 const showCard = ref("")
-const showOrganiserStadiumCard = ref(true);
 
 onMounted(async () => {
   verifyUser()
@@ -28,13 +27,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <OrganiserStadiumCard v-if="showOrganiserStadiumCard === true"></OrganiserStadiumCard>
   <ExploreCard v-if="showCard === 'explore'" @close="showCard = ''" />
   <GeekCardCreation v-if="showGeekCardCreation === true"></GeekCardCreation>
   <ProfileCard v-if="showCard === 'id'" @close="showCard = ''" />
   <GuildCard v-if="showCard === 'group'" @close="showCard = ''" />
-  <GeneralStadiumCard v-if="showCard === 'stadium'" leftTitle="Let the Games Begin!" rightTitle="Join a Competition!"
-    @close="showCard = ''" />
+  <OverallStadiumCard v-if="showCard === 'stadium'" @close="showCard = ''" />
   <div class="w-full h-full bg-linear-[45deg,#8297F6,#89E1FA] flex justify-center items-center">
     <div
       class="font-mono tracking-[-0.1em] text-[#004D9A] text-[calc(100vw/5.3)]/[0.8em] ml-[-0.1em] whitespace-nowrap overflow-hidden absolute top-0">

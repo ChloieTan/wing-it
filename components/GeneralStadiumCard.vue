@@ -26,20 +26,27 @@
     const { data: { value } } = await useFetch(`/api/competition/${id}`, { method: 'get' })
     competition.value = value
   }
+
+
+  const emit = defineEmits(['organise']);
 </script>
 
   <template>
-    <StadiumCard>
+    <StadiumCard leftTitle="Let the Games Begin!" rightTitle="Join a Competition!">
       <div v-if="!competition">
-        <div class="relative mb-6 bg-[#F0F0F0]">
-          <input type="text" v-model="searchQuery" placeholder="Search for your ideal competition"
-            class="w-full p-4 pr-12 rounded-lg border-3 border-black font-mono text-xl" />
-          <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+        <div class="flex gap-x-4 mb-6">
+          <div class="relative  bg-[#F0F0F0] flex-grow">
+            <input type="text" v-model="searchQuery" placeholder="Search for your ideal competition"
+              class="w-full p-4 pr-12 rounded-lg border-3 border-black font-mono text-xl" />
+            <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
           </div>
+          <button class="hover:cursor-pointer border-3 bg-[#71b8ff] px-4 py-1 font-mono"
+            @click="emit('organise')">MANAGE</button>
         </div>
         <div class="space-y-4">
           <div v-for="competition in filteredCompetitions" :key="competition.id" @click="handleSelect(competition.id)"
